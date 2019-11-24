@@ -1,0 +1,20 @@
+/*это NMP конфигурационный файл (создать элимент) 
+  в этот файл я скопировал содержимое и автоматом установились пакеты 
+  bootstrap. jquery. popper по ссылке процесс установки с помощью NPM
+  https://stackoverflow.com/questions/48481003/how-to-use-bootstrap-4-in-asp-net-core
+
+по факту пока не пригодились эти пакеты так как bootstrap  установил простым 
+  копированияе папки lib в папку wwwroot из другого проекта со всем необходимым 
+  содержимым. 
+*/
+
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "bootstrap": "4.0.0",
+    "jquery": "3.3.1",
+    "popper.js": "1.12.9"
+  }
+}

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<string>
+
+<a class="btn btn-block btn-default"
+   asp-action="List"
+   asp-controller="Product"
+   asp-route-category="">Home</a>
+
+@foreach (string category in Model)
+{
+    <a class="btn btn-block
+@(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-default")"
+       asp-action="List"
+       asp-controller="Product"
+       asp-route-category="@category"
+       asp-route-page="1">
+        @category
+    </a>    
+}
+@* представление для левого бокового меню выбора по категориям товаров *@
+
+@*//В представлении применяется один из встроенных дескрипторных вспомогатель­
+            //ных классов(описанных.в главах 24 и 25) для создания элементов а, атрибут href
+            //которых содержит URL, выбирающий определенную категорию товаров.
+            //Запустив приложение, вы увидите ссылки на категории(рис. 9.3). Щелчок на ка­
+            //кой - то категории приводит к тому, что список товаров обновляется, отображая только
+            //товары выбранной категории.
+
+            asp-controller: указывает на контроллер, которому предназначен запрос
+            asp-action: указывает на действие контроллера
+            asp-host: указывает на домен сайта
+            asp-protocol: определяет протокол (http или https)
+            asp-route: указывает на название маршрута
+            asp-all-route-data: устанавливает набор значений для параметров
+            asp-route-[название параметра]: определяет значение для определенного параметра
+            asp-fragment: определяет ту часть хэш-ссылки, которая идет после символа решетки #. Например, "paragraph2" в ссылке "http://mysite.com/#paragraph2"
+
+            С помощью выражения Razor внутри атрибута class мы применяем класс
+    Ьtn-prirnary к элементу , который представляет выбранную категорию , и класс
+    Ьtn-default к остальным элементам . Указанные классы применяют разные стили
+    Bootstrap и делают активную кнопку визуально отличающейся 
+    class="btn btn-block@(category == ViewBag.SelectedCategory ? "btn-primary":"btn-default")
+
+*@

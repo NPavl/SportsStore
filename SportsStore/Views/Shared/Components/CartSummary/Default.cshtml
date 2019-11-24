@@ -1,0 +1,24 @@
+﻿@model Cart
+@* Данное Представление отображает кнопку со значком корзины FontAwesome и, когда в кор­
+    зине присутствуют товары, предоставляет снимок, который сообщает количество эле­
+    ментов и общую сумму.*@
+
+<div class="">
+    @if (Model.Lines.Count() > 0)
+    {
+        <small class="navbar-text">
+            <b>Your cart:</b>
+            @Model.Lines.Sum(x => x.Quantity) item(s)
+            @Model.ComputeTotalValue().ToString("c")
+        </small>
+    }
+    <a class="btn btn-sm btn-default navbar-btn"
+       asp-controller="Cart" asp-action="Index"
+       asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i class="fa fa-shopping-cart"></i>
+    </a>
+</div>
+
+ @*Теперь, имея компонент представления и представление, мож­
+но модифицировать разделяемую компоновку. чтобы итоговая информация по корзине
+включалась в ответы, генерируемые контроллерами приложения (листинг 10.8).*@ 

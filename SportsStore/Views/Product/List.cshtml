@@ -1,0 +1,38 @@
+﻿@*@using SportsStore.Models*@
+@*@model IEnumerable<Products>*@
+@model ProductsListViewModel
+
+@foreach (var p in Model.Products)
+{
+    //обращение к частичному (Partial) предствлению ProductSummary.chtml упрощаем код здесь его вставим.
+    @Html.Partial("ProductSummary", p)
+}
+
+@*нижняя секция с кнопками page 1 2 3*@         
+<div page-model="@Model.PagingInfo" page-action="List"
+     page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-default"
+     page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+     class="btn-group pull-right">
+</div>
+
+@*Нам необходимо стилизовать кнопки, которые генерирует класс PageLinkTagHelреr ,
+    но жестко встраивать классы Bootstrap в код нежелательно , т.к. это затруднит пов­
+    торное использование дескрипторного вспомогательного класса где-то в другом месте
+    приложения либо изменение внешнего вида кнопок. Взамен мы определяем специ­
+    альные атрибуты в элементе div, которые указывают требуемые классы. Данные ат ­
+    рибуты соответствуют свойствам, добавленным в дескрипторный вспомогательный
+    класс, которые затем применяются для стилизации создаваемых элементов - а.*@
+
+@*div page-model="@Model.PagingInfo" page-action="List" -
+    этот НТМL элемент, будет обрабатывать дескрипторный вспомогательный
+        класс (PageLinkTagHelper) - для создания ссылок на страниц.
+         Когда механизм Razor обнаруживает атрибут
+    page-model в элементе div, он обращается к классу PageLinkTagHelper для пре­
+    образования элемента, что и дает набор ссьлок,*@
+
+@*  к элементу div добавлен новый атрибут
+    page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory", который обрабатывается
+    дескрипторным вспомогательным классом и указывает категорию, применяемую для
+    генерации URL. В представление был добавлен только один атрибут, но в словарь до­
+    бавился бы любой атрибут с тем же самым префиксом. *@
