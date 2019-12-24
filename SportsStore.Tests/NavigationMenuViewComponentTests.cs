@@ -10,17 +10,12 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-// Can_Select_Categories
-// Indicates_Selected_Category()
-
 
 namespace SportsStore.Tests
 {
     public class NavigationMenuViewComponentTests
     {
-        // Создаем имитированную реализацию хранилища, которая содержит повторяющиеся и
-        // несортированные категории. Затем мы устанавливаем утверждение о том , что дубликаты
-        // удалены и восстановлен алфавитный порядок.
+      
         [Fact]
         public void Can_Select_Categories()
         {
@@ -33,31 +28,14 @@ namespace SportsStore.Tests
                     new Products { ProductID=4, Name="P4", Category="Oranges"},
                 });
 
-            NavigationMenuViewComponent target = new NavigationMenuViewComponent(mock.Object);
-            //создаем экз класса NavigationMenuViewComponent для вызова не нем метода Invoke 
+            NavigationMenuViewComponent target = new NavigationMenuViewComponent(mock.Object);      
 
             string[] results = ((IEnumerable<string>)(target.Invoke() as ViewViewComponentResult).ViewData.Model).ToArray();
-            //как я понял при вызове метода Invoke на экз класса NavigationMenuViewComponent , Invoke вернет нам уже 
-            //отсортированную с удаленными дубликатами категории и ниже мы проверяем это утверждение.
-
+          
             Assert.True(Enumerable.SequenceEqual(new string[] { "Apples", "Oranges", "Plums" }, results));
-            // создаем массив отосртированных категорий и сверяем с тем которые нам отсортировал  вернул метод Invoke.
+            
         }
-        //-------------------------------------------------------------------------------------
-        // СООБЩЕНИЕ О ВЫБРАННОЙ КАТЕГОРИИ 
-        // Для выполнения проверки того, что компонент представления корректно добавил детали о
-        // выбранной категории, в модульном тесте можно прочитать значение свойства ViewBag, 
-        // которое доступно через класс ViewViewComponentResult, описанный в главе 22
-
-        // Этот модульный тест снабжает компонент представления данными маршрутизации через
-        // свойство ViewComponentContext , посредством которого компоненты представлений
-        // получают все свои данные контекста.Свойство ViewComponentContext предоставляет
-        // доступ к данным контекста, специфичным для представления, с помощью своего свойства
-        // ViewContext, которое, в свою очередь, обеспечивает доступ к информации о маршрути­
-        // зации через свое свойство RouteData.Большая часть кода в модульном тесте связана с
-        // созданием объектов контекста, которые будут предоставлять выбранную категорию таким
-        // же способом, как она бы предлагалась во время выполнения приложения, когда данные кон­
-        // текста предоставляются инфраструктурой ASP.NET Саге MVC.
+      
         [Fact]
         public void Indicates_Selected_Category()
         {
@@ -70,16 +48,15 @@ namespace SportsStore.Tests
             });
 
             NavigationMenuViewComponent target = new NavigationMenuViewComponent(mock.Object);
-            target.ViewComponentContext = new ViewComponentContext // class ViewComponent - A base class for view components.
+            target.ViewComponentContext = new ViewComponentContext 
             {
-                ViewContext = new ViewContext { RouteData = new RouteData() } //класс RouteData- Information about the current routing path.
-            }; // ViewContext - Context for view execution.(Контекст для представления представления)
+                ViewContext = new ViewContext { RouteData = new RouteData() } 
+            };
 
 
             target.RouteData.Values["category"] = categoryToSelect;
 
-            string result = (string)(target.Invoke() as ViewViewComponentResult).ViewData["SelectedCategory"];
-            // класс ViewViewComponentResult отображает частичное представление, когда выполнено                                                                                                               выполнено.
+            string result = (string)(target.Invoke() as ViewViewComponentResult).ViewData["SelectedCategory"]                                                                                                                     
 
             Assert.Equal(categoryToSelect, result);
         }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SportsStore.Models
 {
-    // класс для работы с корзиной покупок 
+  
     public class Cart
     {
         private List<CartLine> lineCollection = new List<CartLine>();
@@ -37,15 +37,9 @@ namespace SportsStore.Models
 
         public virtual IEnumerable<CartLine> Lines => lineCollection;
 
-        // Класс Cart использует класс CartLine, который определен в том же самом файле
-        // и представляет товар, выбранный пользователем, а также приобретаемое его коли­
-        // чество. Мы определили методы для добавления элемента в корзину, удаления элемен ­
-        // та из корзины, вычисления общей стоимости элементов в корзине и очистки корзины
-        // путем удаления всех элементов. Мы также предоставили свойство, которое позволяет
-        // обратиться к содержимому корзины с применением IEnumeraЬle<CartLine>. Все
-        // это легко реализуется с помощью кода С# и небольшой доли кода LINQ. 
+       
     }
-    // вспомогательный для каласса Car класс CartLine
+
     public class CartLine
     {
         public int CartLineID { get; set; }
