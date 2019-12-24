@@ -83,20 +83,14 @@ namespace SportsStore.Tests
 
             Assert.Null(result);
         }
-        //------------------------------------------------------
-
-        //В методе действия Edit(), обрабатывающем запросы POST, мы должны удостоверить­
-        //ся, что хранилищу товаров для сохранения передаются допустимые обновления объекта
-        //Product, полученного в качестве аргумента метода. Кроме того, необходимо проверить,
-        //что недопустимые обновления (т.е.содержащие ошибки проверки достоверности модели)
-        //в хранилище не передаются.
+     
 
         [Fact]
         public void Can_Save_Valid_Changes()
         {
             Mock<IProductRepository> mock = new Mock<IProductRepository>();
-            Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>(); // ITempDataDictionary - Представляет 
-            // набор данных, который сохраняется только от одного запроса к следующему
+            Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>(); 
+            
 
             AdminController target = new AdminController(mock.Object)
             {
@@ -108,7 +102,7 @@ namespace SportsStore.Tests
 
             mock.Verify(m => m.SaveProduct(product));
 
-            Assert.IsType<RedirectToActionResult>(result); // IsType - Проверяет, что объект является точно заданным типом (а не производным типом).
+            Assert.IsType<RedirectToActionResult>(result); 
             Assert.Equal("Index", (result as RedirectToActionResult).ActionName);
         }
 
@@ -121,7 +115,7 @@ namespace SportsStore.Tests
 
             Products product = new Products { Name = "Test" };
 
-            target.ModelState.AddModelError("error", "error"); //  ModelState состояние модели и валидация привязки модели.
+            target.ModelState.AddModelError("error", "error"); 
 
             IActionResult result = target.Edit(product);
 
@@ -130,11 +124,7 @@ namespace SportsStore.Tests
             Assert.IsType<ViewResult>(result);
         }
 
-        //------------------------------------------------------------------
-        // Нам нужно протестировать основное поведение метода действия Delete() , которое за­
-        // ключается в том, что при передаче в качестве параметра допустимого идентификатора
-        // ProductID метод действия должен вызвать метод DeleteProduct() хранилища и пе­
-        // редать ему корректное значение ProductID удаляемого товара.
+       
 
         [Fact]
         public void Can_Delete_Valid_Products()
