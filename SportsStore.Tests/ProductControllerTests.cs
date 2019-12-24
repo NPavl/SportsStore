@@ -126,7 +126,6 @@ namespace SportsStore.Tests
             Assert.Equal(2, res2); 
             Assert.Equal(1, res3); 
             Assert.Equal(5, resAll); 
-
         }
 
     }

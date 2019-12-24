@@ -56,7 +56,7 @@ namespace SportsStore.Tests
 
             target.RouteData.Values["category"] = categoryToSelect;
 
-            string result = (string)(target.Invoke() as ViewViewComponentResult).ViewData["SelectedCategory"]                                                                                                                     
+            string result = (string)(target.Invoke() as ViewViewComponentResult).ViewData["SelectedCategory"];                                                                                                                     
 
             Assert.Equal(categoryToSelect, result);
         }
